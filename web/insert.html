@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新增商品</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 150px auto;
+            padding: 0;
+        }
+
+        form {
+            width: 300px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="file"] {
+            margin-top: 5px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        input[type="file"]:hover {
+            background-color: #f0f0f0;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h3>新增商品</h3>
+<form action="ProductController" method="post" enctype="multipart/form-data">
+    <input type="text" name="pid" value="" placeholder="输入编码"><br/>
+    <input type="text" name="pname" value="" placeholder="输入名称"><br/>
+    <input type="text" name="punit" value="" placeholder="输入规格"><br/>
+    <input type="text" name="price" value="" placeholder="输入价格"><br/>
+    <input type="file" name="image" accept="image/*"><br/>
+    <input type="submit" value="新增商品">
+</form>
+</body>
+</html>

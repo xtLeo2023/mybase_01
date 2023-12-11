@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 150px auto;
+            padding: 0;
+        }
+
+        form {
+            width: 300px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        span {
+            width: 80px;
+            display: inline-block;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        div {
+            margin-top: 0px;
+            color: #888;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .tip{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h3>注册</h3>
+<form action="RegisterController" method="post">
+    <input type="text" name="email" size="25" maxlength="100" placeholder="输入邮箱...">
+    <br/>
+    <input type="text" name="username" size="25" maxlength="16" placeholder="输入用户名...">
+    <br/>
+    <input type="password" name="password" size="25" maxlength="16" placeholder="输入密码...">
+    <br/>
+    <input type="password" name="password2" size="25" maxlength="16" placeholder="确认密码...">
+    <br/>
+    <input type="submit" value="提交">
+    <div>
+        <p class="tip">tips</p>
+        <p>要求用户名长度为1到16个字符，只允许包含字母、数字和下划线。</p>
+        <p>密码只包含字母、数字和下划线字符，长度在8到16个字符之间。</p>
+    </div>
+</form>
+</body>
+</html>

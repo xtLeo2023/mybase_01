@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            align-items: center;
+            margin: 200px auto;
+            padding: 0;
+        }
+
+        form {
+            width: 300px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        div {
+            margin-top: 0px;
+            color: #888;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .tip{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h3>登录</h3>
+<form action="LoginController" method="post">
+
+    <input type="text" name="username" placeholder="输入用户名...">
+    <br/>
+    <input type="password" name="password" placeholder="输入密码...">
+    <br/>
+    <input type="submit" value="提交">
+    <div>
+        <p class="tip">tips</p>
+        <p>示例账号：user001</p>
+        <p>示例密码：Mypass001</p>
+    </div>
+</form>
+</body>
+</html>
