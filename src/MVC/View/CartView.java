@@ -19,6 +19,9 @@ public class CartView extends HttpServlet {
         CartModel cModel = new CartModel();
         List<CartItem> items = cModel.selectAll(username);
         CartItem item;
+        // 使用 String.format 保留两位小数
+        String total = String.format("%.2f", cModel.getCount(username));
+
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
@@ -27,13 +30,23 @@ public class CartView extends HttpServlet {
         out.println("<title>商城</title>");
         out.println("<style>");
         out.println("body { text-align: center; }");
-        out.println("table { width: 80%; margin: auto; font-family: Arial, sans-serif; border-collapse: collapse; }");
+        out.println(".scrollable-table { width: 80%; margin: auto; height: 75%; overflow: auto;border-bottom:solid 1px #8c8c8c; }"); // 设置所需的高度
+        out.println("table { width: 100%; margin: auto; font-family: Arial, sans-serif; border-collapse: collapse; }");
         out.println("th, td { border: 1px solid #dddddd; text-align: center; padding: 8px; min-width: 100px;}");
         out.println("th { background-color: #f2f2f2; }");
         out.println("img { max-width: 100%; max-height: 100%; display: block; margin: auto; }");
         out.println(".user-info { text-align: left; margin-left: 10%; margin-bottom: 20px; }");
         out.println(".user-info a { margin-right: 20px; }");
         out.println("</style>");
+
+        out.println("<script>");
+        out.println("function clearCart() {");
+        out.println("  if (confirm('确定清空购物车吗？')) {");
+        out.println("    document.getElementById('clearCartForm').submit();");
+        out.println("  }");
+        out.println("}");
+        out.println("</script>");
+
         out.println("</head>");
         out.println("<body>");
 
@@ -43,6 +56,7 @@ public class CartView extends HttpServlet {
         out.println("<a href='LogoutController'>注销</a>");
         out.println("</div>");
 
+        out.println("<div class='scrollable-table'>");
         out.println("<table>");
         out.println("<tr>");
         out.println("<th>图片</th>");
@@ -101,6 +115,17 @@ public class CartView extends HttpServlet {
             out.println("</tr>");
         }
         out.println("</table>");
+        out.println("</div>");
+
+        out.println("<div style='text-align: right; margin-right:10.5%; margin-left:10.5%; margin-top: 20px; '>");
+        out.println("<span style='font-size:20px; font-weight:bold; float:left;'>总计："+total+"</span>");
+        out.println("<form id='clearCartForm' action='CartController' method='post' style='display: inline;'>");
+        out.println("<input type='hidden' name='dose' value='clear'>");
+        out.println("<input type='hidden' name='username' value='" + username + "'>");
+        out.println("<button type='button' onclick='clearCart()' style='width:60px; height:30px; font-size:16px;'>结算</button>");
+        out.println("</form>");
+        out.println("</div>");
+
         out.println("</body>");
         out.println("</html>");
     }

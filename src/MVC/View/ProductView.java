@@ -23,9 +23,11 @@ public class ProductView extends HttpServlet {
         out.println("<html>");
         out.println("<head>");
         out.println("<title>商城</title>");
+
         out.println("<style>");
         out.println("body { text-align: center; }");
-        out.println("table { width: 80%; margin: auto; font-family: Arial, sans-serif; border-collapse: collapse; }");
+        out.println(".scrollable-table { width: 80%; margin: auto; height: 75%; overflow: auto; border-bottom:solid 1px #dddddd; }"); // 设置所需的高度
+        out.println("table { width: 100%; margin: auto; font-family: Arial, sans-serif; border-collapse: collapse; overflow: auto; }");
         out.println("th, td { border: 1px solid #dddddd; text-align: center; padding: 8px; }");
         out.println("th { background-color: #f2f2f2; }");
         out.println("img { max-width: 100%; max-height: 100%; display: block; margin: auto; }");
@@ -33,6 +35,7 @@ public class ProductView extends HttpServlet {
         out.println(".user-info a { margin-right: 20px; }");
         out.println(".addToCartForm { display: inline; }");
         out.println("</style>");
+
         out.println("<script>");
         out.println("function showConfirmation() {");
         out.println("  alert('商品已添加到购物车！');");
@@ -47,6 +50,7 @@ public class ProductView extends HttpServlet {
         out.println("<a href='LogoutController'>注销</a>");
         out.println("</div>");
 
+        out.println("<div class='scrollable-table'>");
         out.println("<table>");
         out.println("<tr>");
         out.println("<th>图片</th>");
@@ -74,6 +78,7 @@ public class ProductView extends HttpServlet {
             out.println("</tr>");
         }
         out.println("</table>");
+        out.println("</div>");
 
         out.println("</body>");
         out.println("</html>");

@@ -18,30 +18,41 @@ public class CartController extends HttpServlet {
 
         String dose = request.getParameter("dose");
         String username = request.getParameter("username");
-        int pid = Integer.parseInt(request.getParameter("pid"));
-        int number = Integer.parseInt(request.getParameter("number"));
+        int pid = 0;
+        int number = 0;
 
         // 创建一个 Cart 对象，使用 CartModel 将其插入到数据库中
         Cart cart = new Cart(username, pid, number);
         CartModel cartModel = new CartModel();
 
-        if (dose.equals("add")) {
-            Cart result=cartModel.search(cart);
-            if(!result.getUsername().equals("null")){
+        if(dose.equals("clear")){
+            cartModel.clear(cart);
+            response.sendRedirect("CartView");
+        }else{
+
+            pid = Integer.parseInt(request.getParameter("pid"));
+            number = Integer.parseInt(request.getParameter("number"));
+            cart.setPid(pid);
+            cart.setNumber(number);
+
+            if (dose.equals("add")) {
+                Cart result=cartModel.search(cart);
+                if(!result.getUsername().equals("null")){
+                    cartModel.increaseNumber(cart);
+                }else{
+                    cartModel.insert(cart);
+                }
+                response.sendRedirect("ProductView");
+            } else if (dose.equals("del")) {
+                cartModel.delete(cart);
+                response.sendRedirect("CartView");
+            } else if (dose.equals("reduce")) {
+                cartModel.reduceNumber(cart);
+                response.sendRedirect("CartView");
+            } else if (dose.equals("increase")) {
                 cartModel.increaseNumber(cart);
-            }else{
-                cartModel.insert(cart);
+                response.sendRedirect("CartView");
             }
-            response.sendRedirect("ProductView");
-        } else if (dose.equals("del")) {
-            cartModel.delete(cart);
-            response.sendRedirect("CartView");
-        } else if (dose.equals("reduce")) {
-            cartModel.reduceNumber(cart);
-            response.sendRedirect("CartView");
-        } else if (dose.equals("increase")) {
-            cartModel.increaseNumber(cart);
-            response.sendRedirect("CartView");
         }
 
     }

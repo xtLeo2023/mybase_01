@@ -69,6 +69,20 @@ public class CartModel {
         }
     }
 
+    public void clear(Cart cart){
+        try(
+                DruidPooledConnection connection= Druid.getConnection();
+                PreparedStatement statement = connection.prepareStatement(
+                        "delete from cart where username=? "
+                );
+        ){
+            statement.setString(1,cart.getUsername());
+            statement.executeUpdate();
+        }catch (SQLException throwAbles){
+            throwAbles.printStackTrace();
+        }
+    }
+
     public void reduceNumber(Cart cart){
         try(
                 DruidPooledConnection connection= Druid.getConnection();
@@ -124,6 +138,26 @@ public class CartModel {
             throwAbles.printStackTrace();
         }
         return preCart;
+    }
+
+    public double getCount(String username){
+        double amount=0.00;
+        try (
+                DruidPooledConnection connection = Druid.getConnection();
+                PreparedStatement statement = connection.prepareStatement(
+                        "select sum(number*price) as amount from cart a join product b on a.pid=b.pid where username=?"
+                )
+        ) {
+            statement.setString(1,username);
+            try (ResultSet result = statement.executeQuery()) {
+                if(result.next()) {
+                   amount=result.getDouble("amount");
+                }
+            }
+        } catch (SQLException throwAbles) {
+            throwAbles.printStackTrace();
+        }
+        return amount;
     }
 
 }
